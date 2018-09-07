@@ -1,10 +1,6 @@
 import React, { Component } from "react";
 
 export default class WochentagSelect extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   onWochentagChange = tag => {
     this.props.onWochentagChange(tag);
   };

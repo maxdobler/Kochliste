@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import TextInput from "./TextInput";
-import MultipleDatePicker from "react-multiple-datepicker";
 import WochentagSelect from "./WochentagSelect";
+import DayPicker, { DateUtils } from "react-day-picker";
+import "react-day-picker/lib/style.css";
 
 const tage = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
 
@@ -18,7 +19,12 @@ function initWochentage() {
 export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: "", email: "", wochentage: initWochentage() };
+    this.state = {
+      name: "",
+      email: "",
+      wochentage: initWochentage(),
+      nichtTage: []
+    };
   }
 
   onNameChange = name => this.setState({ name });
@@ -28,10 +34,19 @@ export default class App extends Component {
     wochentage[tag] = !wochentage[tag];
     this.setState({ wochentage });
   };
-  handleSubmit = event => {
-    event.preventDefault();
+  handleDayClick = (day, { selected }) => {
+    console.log(day);
+    const { nichtTage } = this.state;
+    if (selected) {
+      const selectedIndex = nichtTage.findIndex(selectedDay =>
+        DateUtils.isSameDay(selectedDay, day)
+      );
+      nichtTage.splice(selectedIndex, 1);
+    } else {
+      nichtTage.push(day);
+    }
+    this.setState({ nichtTage });
   };
-  handleNichtTage = nichtTage => this.setState({ nichtTage });
 
   render() {
     return (
@@ -50,16 +65,25 @@ export default class App extends Component {
             onTextChange={this.onNameChange}
           />
           <br />
+          <br />
           <TextInput
             label="E-Mail-Adresse"
             text={this.state.email}
             onTextChange={this.onEmailChange}
           />
           <br />
+          <br />
+          <br />
           <label>
             Tage an denen es gar nicht geht:
-            <MultipleDatePicker onSubmit={this.handleNichtTage} />
+            <br />
+            <DayPicker
+              selectedDays={this.state.nichtTage}
+              onDayClick={this.handleDayClick}
+            />
           </label>
+          <br />
+          <br />
           <br />
           <WochentagSelect
             onWochentagChange={this.onWochentagChange}
