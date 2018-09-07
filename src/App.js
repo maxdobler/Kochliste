@@ -2,19 +2,36 @@ import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
 import TextInput from "./TextInput";
+import MultipleDatePicker from "react-multiple-datepicker";
+import WochentagSelect from "./WochentagSelect";
 
-class App extends Component {
+const tage = ["Montag", "Dienstag", "Mittwoch", "Donnerstag", "Freitag"];
+
+function initWochentage() {
+  let state = {};
+  for (const tag of tage) {
+    state[tag] = false;
+  }
+  return state;
+}
+
+export default class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { name: "", email: "" };
+    this.state = { name: "", email: "", wochentage: initWochentage() };
   }
 
   onNameChange = name => this.setState({ name });
   onEmailChange = email => this.setState({ email });
+  onWochentagChange = tag => {
+    let wochentage = Object.assign({}, this.state.wochentage);
+    wochentage[tag] = !wochentage[tag];
+    this.setState({ wochentage });
+  };
   handleSubmit = event => {
-    alert("name: " + this.state.name + "; mail: " + this.state.email);
     event.preventDefault();
   };
+  handleNichtTage = nichtTage => this.setState({ nichtTage });
 
   render() {
     return (
@@ -39,11 +56,20 @@ class App extends Component {
             onTextChange={this.onEmailChange}
           />
           <br />
+          <label>
+            Tage an denen es gar nicht geht:
+            <MultipleDatePicker onSubmit={this.handleNichtTage} />
+          </label>
+          <br />
+          <WochentagSelect
+            onWochentagChange={this.onWochentagChange}
+            wochentage={this.state.wochentage}
+            tage={tage}
+          />
+          <br />
           <input type="submit" value="Abschicken" />
         </form>
       </div>
     );
   }
 }
-
-export default App;
