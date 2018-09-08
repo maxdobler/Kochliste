@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-
 export default class TextInput extends Component {
   handleChange = event => this.props.onTextChange(event.target.value);
 
