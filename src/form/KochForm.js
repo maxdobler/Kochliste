@@ -62,11 +62,11 @@ export default class KochForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
-        <Panel>
-          <Panel.Body>
+        <Panel bsStyle="info">
+          <Panel.Heading>
             Damit wir die Kochliste planen können bitten wir euch, folgende
-            Seite kurz auszufüllen. Bitte nur einmal ausfüllen.
-          </Panel.Body>
+            Seite kurz auszufüllen. Aber bitte nur einmal ausfüllen.
+          </Panel.Heading>
         </Panel>
         <TextInput
           label="Name des Kindes"
