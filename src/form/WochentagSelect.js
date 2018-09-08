@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { FormGroup, Checkbox, ControlLabel } from "react-bootstrap";
 
 export default class WochentagSelect extends Component {
   onWochentagChange = tag => {
@@ -6,7 +7,7 @@ export default class WochentagSelect extends Component {
   };
 
   renderCheckbox = tag => (
-    <Checkbox
+    <Wochentag
       tag={tag}
       isChecked={this.props.wochentage[tag]}
       onWochentagChange={this.onWochentagChange}
@@ -17,20 +18,22 @@ export default class WochentagSelect extends Component {
   renderCheckboxes = () => this.props.tage.map(this.renderCheckbox);
 
   render() {
-    return <div>{this.renderCheckboxes()}</div>;
+    return (
+      <FormGroup>
+        <ControlLabel>Bitte alle möglichen Wochentage auswählen:</ControlLabel>
+        {this.renderCheckboxes()}
+      </FormGroup>
+    );
   }
 }
 
-const Checkbox = props => {
+const Wochentag = props => {
   return (
-    <div>
-      <input
-        type="checkbox"
-        value={props.tag}
-        checked={props.isChecked}
-        onChange={() => props.onWochentagChange(props.tag)}
-      />
+    <Checkbox
+      checked={props.isChecked}
+      onChange={() => props.onWochentagChange(props.tag)}
+    >
       {props.tag}
-    </div>
+    </Checkbox>
   );
 };
