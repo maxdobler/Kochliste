@@ -3,6 +3,7 @@ import TextInput from "./TextInput";
 import WochentagSelect from "./WochentagSelect";
 import DayPicker, { DateUtils } from "react-day-picker";
 import "react-day-picker/lib/style.css";
+import { Button } from "react-bootstrap";
 
 const tage = ["Montag", "Mittwoch", "Donnerstag", "Freitag"];
 
@@ -84,7 +85,10 @@ export default class KochForm extends Component {
           tage={tage}
         />
         <br />
-        <input type="submit" value="Abschicken" />
+
+        <Button type="submit" bsStyle="primary">
+          Abschicken
+        </Button>
       </form>
     );
   }
