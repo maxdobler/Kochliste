@@ -20,7 +20,7 @@ export default class WochentagSelect extends Component {
   render() {
     return (
       <FormGroup>
-        <ControlLabel>Bitte alle möglichen Wochentage auswählen:</ControlLabel>
+        <ControlLabel>Alle möglichen Wochentage auswählen:</ControlLabel>
         {this.renderCheckboxes()}
       </FormGroup>
     );

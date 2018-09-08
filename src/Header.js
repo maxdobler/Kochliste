@@ -4,7 +4,7 @@ import { Nav, Navbar, NavItem } from "react-bootstrap";
 export default class Header extends Component {
   render() {
     return (
-      <Navbar fixedTop collapseOnSelect>
+      <Navbar fixedTop collapseOnSelect bsStyle="inverse">
         <Navbar.Header>
           <Navbar.Brand>
             <a href="#/home">Kochliste</a>

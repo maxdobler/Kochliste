@@ -3,7 +3,16 @@ import TextInput from "./TextInput";
 import WochentagSelect from "./WochentagSelect";
 import DayPicker, { DateUtils } from "react-day-picker";
 import "react-day-picker/lib/style.css";
-import { Button } from "react-bootstrap";
+import {
+  Button,
+  FormGroup,
+  ControlLabel,
+  FormControl,
+  Row,
+  Col,
+  Panel
+} from "react-bootstrap";
+import "./KochForm.css";
 
 const tage = ["Montag", "Mittwoch", "Donnerstag", "Freitag"];
 
@@ -53,39 +62,40 @@ export default class KochForm extends Component {
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
+        <Panel>
+          <Panel.Body>
+            Damit wir die Kochliste planen können bitten wir euch, folgende
+            Seite kurz auszufüllen. Bitte nur einmal ausfüllen.
+          </Panel.Body>
+        </Panel>
         <TextInput
-          label="Name"
+          label="Name des Kindes"
           text={this.state.name}
           onTextChange={this.onNameChange}
         />
-        <br />
-        <br />
-        <TextInput
-          label="E-Mail-Adresse"
-          text={this.state.email}
-          onTextChange={this.onEmailChange}
-        />
-        <br />
-        <br />
-        <br />
-        <label>
-          Tage an denen es gar nicht geht:
-          <br />
-          <DayPicker
-            selectedDays={this.state.nichtTage}
-            onDayClick={this.handleDayClick}
-          />
-        </label>
-        <br />
-        <br />
-        <br />
-        <WochentagSelect
-          onWochentagChange={this.onWochentagChange}
-          wochentage={this.state.wochentage}
-          tage={tage}
-        />
-        <br />
-
+        <Row id="wuensche">
+          <Col xs={12} md={6}>
+            <WochentagSelect
+              onWochentagChange={this.onWochentagChange}
+              wochentage={this.state.wochentage}
+              tage={tage}
+            />
+          </Col>
+          <Col xs={12} md={6}>
+            <FormGroup>
+              <ControlLabel>
+                Alle Tage an denen es gar nicht geht auswählen:
+              </ControlLabel>
+              <FormControl.Static>
+                <DayPicker
+                  className="nichtTage"
+                  selectedDays={this.state.nichtTage}
+                  onDayClick={this.handleDayClick}
+                />
+              </FormControl.Static>
+            </FormGroup>
+          </Col>
+        </Row>
         <Button type="submit" bsStyle="primary">
           Abschicken
         </Button>

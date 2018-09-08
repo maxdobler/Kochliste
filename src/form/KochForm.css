@@ -1,0 +1,9 @@
+#wuensche {
+  margin-top: 2em;
+  margin-bottom: 2em;
+}
+
+.nichtTage {
+  min-height: 210px;
+  border: 1px solid lightgrey;
+}
