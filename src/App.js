@@ -35,7 +35,6 @@ export default class App extends Component {
     this.setState({ wochentage });
   };
   handleDayClick = (day, { selected }) => {
-    console.log(day);
     const { nichtTage } = this.state;
     if (selected) {
       const selectedIndex = nichtTage.findIndex(selectedDay =>
@@ -46,6 +45,11 @@ export default class App extends Component {
       nichtTage.push(day);
     }
     this.setState({ nichtTage });
+  };
+
+  handleSubmit = event => {
+    console.log(this.state);
+    event.preventDefault();
   };
 
   render() {
